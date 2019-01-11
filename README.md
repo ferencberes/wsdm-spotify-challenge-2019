@@ -1,4 +1,4 @@
-# wsdm-spotify-challange-2019
+# wsdm-spotify-challenge-2019
 
 In this repository, we present the solution of the team Definitive Turtles for ACM WSDM Cup 2019 [Spotify Sequential Skip Prediction Challenge](https://www.crowdai.org/challenges/spotify-sequential-skip-prediction-challenge) that reached 10th place on the final leaderboard.
 
@@ -14,6 +14,6 @@ Our solution is based on gradient boosted trees (GBT) combining several statisti
 
 # Usage
 
-Currently, we are revisioning our code in order to make it available for the public community.
+Currently, we are revisioning our code in order to make it available for the online community.
 
 Instructions on how to run our code are **coming SOON**.
