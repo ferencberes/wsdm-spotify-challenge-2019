@@ -5,7 +5,7 @@ In this repository, we present the solution of the team Definitive Turtles for A
 # Requirements
 
 - Python 3.5 conda environment
-- Python packages: turicreate, pandas, numpy, pytorch **etc.? TODO**
+- Python packages: turicreate, pandas, numpy, pytorch, scikit-learn
 - In our solution we heavily depend on the parallel processing power of the turicreate package.
 
 # Introduction
