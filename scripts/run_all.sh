@@ -20,3 +20,10 @@ python train_gbt_model.py 2018-08-13_2018-08-19_with_track_stats_2018-07-15_2018
 python train_gbt_model.py 2018-08-27_2018-09-02_with_track_stats_2018-07-15_2018-09-18 200000
 python train_gbt_model.py 2018-09-10_2018-09-16_with_track_stats_2018-07-15_2018-09-18 200000
 echo "GBT model training DONE"
+echo "Prediction with GBT STARTED"
+bash predict_all.sh 2018-07-15_2018-07-22_with_track_stats_2018-07-15_2018-09-18
+bash predict_all.sh 2018-07-30_2018-08-05_with_track_stats_2018-07-15_2018-09-18
+bash predict_all.sh 2018-08-13_2018-08-19_with_track_stats_2018-07-15_2018-09-18
+bash predict_all.sh 2018-08-27_2018-09-02_with_track_stats_2018-07-15_2018-09-18
+bash predict_all.sh 2018-09-10_2018-09-16_with_track_stats_2018-07-15_2018-09-18
+echo "Prediction with GBT DONE"

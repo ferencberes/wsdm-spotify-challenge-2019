@@ -16,7 +16,7 @@ if len(sys.argv) == 3:
     experiment_id = sys.argv[1]
     num_rnd_sessions = sys.argv[2]
 else:
-    raise RuntimeError("feature_engineering.py <experiment_id> <num_rnd_sessions>")
+    raise RuntimeError("train_gbt_model.py <experiment_id> <num_rnd_sessions>")
 
 experiment_dir = "/mnt/idms/fberes/data/wsdmcup19/deploy/split_0/"
 model_params = {"max_iterations":80, "max_depth":5, "min_child_weight":100, "validation_set":'auto'}

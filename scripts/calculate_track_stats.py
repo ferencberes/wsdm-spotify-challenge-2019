@@ -8,7 +8,7 @@ from wsdm_utils import *
 if len(sys.argv) == 5:
     date_min = sys.argv[1]
     date_max = sys.argv[2]
-    max_log_index = sys.argv[3]
+    max_log_index = int(sys.argv[3])
     which_part = sys.argv[4]
     if not which_part in ["first","second","both"]:
         raise RuntimeError("Choose 'which_part' from values: 'first'/'second'/'both'")

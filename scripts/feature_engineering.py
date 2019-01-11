@@ -16,7 +16,7 @@ from wsdm_utils import *
 if len(sys.argv) == 5:
     date_min = sys.argv[1]
     date_max = sys.argv[2]
-    max_log_index = sys.argv[3]
+    max_log_index = int(sys.argv[3])
     stats_experiment_id = sys.argv[4]
 else:
     raise RuntimeError("feature_engineering.py <date_min>  <date_max> <max_log_index> <stats_experiment_id>")
@@ -24,7 +24,6 @@ else:
 experiment_dir = "/mnt/idms/fberes/data/wsdmcup19/deploy/split_0/"
 data_dir = "/mnt/idms/projects/recsys2018/WSDM/data"
 compressed_track_file_path = "/mnt/idms/fberes/data/wsdmcup19/deploy/all_tracks.pickle.gz"
-log_types = None if max_log_index == 9 else list(range(max_log_index+1))
 MAX_THREADS = 20
 os.environ["OMP_NUM_THREADS"] = str(MAX_THREADS)
 
@@ -55,7 +54,7 @@ print(ss.log_summary.head())
 session_filter = {
      "date_min": date_min,
      "date_max": date_max,
-     "log_types": log_types,
+     "log_types": None if max_log_index == 9 else list(range(max_log_index+1)),
      "features_dir":features_dir
 }
 

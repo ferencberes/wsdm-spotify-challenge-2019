@@ -14,6 +14,10 @@ Our solution is based on gradient boosted trees (GBT) combining several statisti
 
 # Usage
 
-Currently, we are revisioning our code in order to make it available for the online community.
+Please follow the steps in order if you want to reproduce our final solution:
 
-Instructions on how to run our code are **coming SOON**.
+1. Preprosessing: please follow the instructions [here](preprocess/)
+2. Deep learning models:  please follow the instructions [here](methods/)
+3. Gradient Boosted Trees: related instructions are coming SOON.
+
+If you have any problem with our code please contact the team members, [Ferenc Béres](mailto:beres@sztaki.hu) or [Domokos Kelen](https://github.com/proto-n).

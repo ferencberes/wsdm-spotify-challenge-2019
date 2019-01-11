@@ -9,3 +9,6 @@ echo "Feature engineering for GBT DONE"
 echo "GBT model training STARTED"
 python train_gbt_model.py 2018-09-18_2018-09-18_with_track_stats_2018-09-18_2018-09-18 10000
 echo "GBT model training DONE"
+echo "Prediction with GBT STARTED"
+python predict_with_model.py 2018-09-18 2018-09-18 0 2018-09-18_2018-09-18_with_track_stats_2018-09-18_2018-09-18
+echo "Prediction with GBT DONE"
