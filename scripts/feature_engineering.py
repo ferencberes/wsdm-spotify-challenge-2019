@@ -13,21 +13,22 @@ from sframe_utils import *
 from wsdm_utils import *
 
 # Parameters
-if len(sys.argv) == 3:
+if len(sys.argv) == 5:
     date_min = sys.argv[1]
     date_max = sys.argv[2]
-    log_types = [0,1,2,3]
+    max_log_index = sys.argv[3]
+    stats_experiment_id = sys.argv[4]
 else:
-    raise RuntimeError("feature_engineering.py <date_min>  <date_max>")
+    raise RuntimeError("feature_engineering.py <date_min>  <date_max> <max_log_index> <stats_experiment_id>")
 
 experiment_dir = "/mnt/idms/fberes/data/wsdmcup19/deploy/split_0/"
 data_dir = "/mnt/idms/projects/recsys2018/WSDM/data"
 compressed_track_file_path = "/mnt/idms/fberes/data/wsdmcup19/deploy/all_tracks.pickle.gz"
-base_experiment_id = "track_stats_all"
+log_types = None if max_log_index == 9 else list(range(max_log_index+1))
 MAX_THREADS = 20
 os.environ["OMP_NUM_THREADS"] = str(MAX_THREADS)
 
-folder = "%s/train/%s_%s_with_%s/" % (experiment_dir, date_min, date_max, base_experiment_id)
+folder = "%s/train/%s_%s_with_%s/" % (experiment_dir, date_min, date_max, stats_experiment_id)
 if not os.path.exists(folder):
     os.makedirs(folder)
 print("Files will be saved in this folder:", folder)
@@ -81,7 +82,7 @@ del tr_info
 
 print("## ii.) Track info based aggregations")
 
-track_stats_dir = "%s/train/%s/" % (experiment_dir, base_experiment_id)
+track_stats_dir = "%s/train/%s/" % (experiment_dir, stats_experiment_id)
 
 for part in ["first","second","both"]:
     track_infos = tc.load_sframe("%s/%s_track_infos" % (track_stats_dir, part))

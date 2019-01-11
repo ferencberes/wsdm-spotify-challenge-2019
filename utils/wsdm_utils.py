@@ -109,6 +109,81 @@ class SessionFileSelector():
         print("Loading files FINISHED")
         return loaded_data
 
+### Training ###
+
+def select_rnd_sessions(data, id_col, k, seed=None):
+    uniq_ids = np.unique(np.array(data[id_col]))
+    print("Number of unique sessions: %i" % len(uniq_ids))
+    np.random.seed(seed=seed)
+    selected_sessions = list(np.random.choice(uniq_ids, k, replace=False))
+    print("Number of selected sessions: %i" % len(selected_sessions))
+    selected_sf = data.filter_by(selected_sessions, id_col)
+    print("Number of selected records (session tracks): %i" % len(selected_sf))
+    return selected_sf
+
+def train_test_split(selected_sf, id_col, test_ratio):
+    codes = np.array(selected_sf[id_col])
+    selected_sf.remove_column(id_col, inplace=True)
+    if test_ratio == 1.0:
+        return None, None, selected_sf, codes
+    else:
+        idx = int(len(selected_sf)*(1.0-test_ratio))
+        while codes[idx-1]==codes[idx]:
+            # do not split sessions in half
+            idx+=1
+        tr_codes = codes[:idx]
+        te_codes = codes[idx:]
+        tr_sf = selected_sf[:idx]
+        te_sf = selected_sf[idx:]
+        print(tr_sf.shape, te_sf.shape)
+        return tr_sf, tr_codes, te_sf, te_codes
+    
+class ModelTrainerSFrame():
+    def __init__(self, data, label_col="target", id_col="session_code", seed=None):
+        """pandas.DataFrame and turicreate.SFrame can also be provided as 'data'"""
+        self.label_col = label_col
+        self.id_col = id_col
+        self.data = data
+        self.seed = seed
+    
+    def train(self, model_param_dict={"max_iterations":2, "max_depth":3, "validation_set":None}, columns=None, k=None, test_ratio=0.4):
+        if columns == None:
+            columns = self.data.column_names()
+        else:
+            if not self.id_col in columns:
+                columns.append(self.id_col)
+            if not self.label_col in columns:
+                columns.append(self.label_col)
+        if k == None:
+            selected_data = self.data[columns]
+        else:
+            selected_data = select_rnd_sessions(self.data[columns], self.id_col, k, seed=self.seed)
+        tr_sf, tr_codes, te_sf, te_codes = train_test_split(selected_data, self.id_col, test_ratio)
+        print("Train-test split DONE")
+        model_param_dict.update({"dataset":tr_sf, "target":self.label_col})
+        model = tc.boosted_trees_classifier.create(**model_param_dict)
+        return {
+            "model": model,
+            "train_features": tr_sf,
+            "train_session_codes": tr_codes,
+            "test_features": te_sf,
+            "test_session_codes": te_codes
+        }
+
+def sframe_important_feats(model):
+    imp_sf = model.get_feature_importance()
+    return imp_sf[imp_sf["count"]>0]
+    
+def sframe_model_predict(model, features, codes, label_col):
+    pred = model.classify(features)
+    pred["session_code"] = codes
+    pred["session_position"] = features["session_position"]
+    col_order = ["session_code","session_position","prediction","probability"]
+    if label_col != None:
+        pred["skip"] = features[label_col]
+        col_order.append("skip")
+    return pred.rename({"class":"prediction"})[col_order]
+    
 ### Evaluation ###
 
 def meanap_np(skips, preds, groups):

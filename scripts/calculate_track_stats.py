@@ -5,16 +5,17 @@ from sframe_utils import *
 from wsdm_utils import *
 
 # Parameters
-if len(sys.argv) == 2:
-    which_part = sys.argv[1]
+if len(sys.argv) == 5:
+    date_min = sys.argv[1]
+    date_max = sys.argv[2]
+    max_log_index = sys.argv[3]
+    which_part = sys.argv[4]
     if not which_part in ["first","second","both"]:
         raise RuntimeError("Choose 'which_part' from values: 'first'/'second'/'both'")
 else:
-    raise RuntimeError("calculate_track_stats.py <which_part:'first'/'second'/'both'>")
-experiment_id = "track_stats_all"
-date_min = "2018-07-15"
-date_max = "2018-09-18"
-log_types = None
+    raise RuntimeError("calculate_track_stats.py <date_min>  <date_max> <max_log_index> <which_part:'first'/'second'/'both'>")
+experiment_id = "track_stats_%s_%s" % (date_min, date_max)
+log_types = None if max_log_index == 9 else list(range(max_log_index+1))
 experiment_dir = "/mnt/idms/fberes/data/wsdmcup19/deploy/split_0/"
 data_dir = "/mnt/idms/projects/recsys2018/WSDM/data"
 MAX_THREADS = 20
