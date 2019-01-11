@@ -20,4 +20,4 @@ Please follow the steps in order if you want to reproduce our final solution:
 2. Deep learning models:  please follow the instructions [here](methods/)
 3. Gradient Boosted Trees: related instructions are coming SOON.
 
-If you have any problem with our code please contact the team members, [Ferenc Béres](mailto:beres@sztaki.hu) or [Domokos Kelen](https://github.com/proto-n).
+If you have any problem with the code please contact the team members, [Ferenc Béres](mailto:beres@sztaki.hu) or [Domokos Kelen](mailto:kdomokos@sztaki.hu).
