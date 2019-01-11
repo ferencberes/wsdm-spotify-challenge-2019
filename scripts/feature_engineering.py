@@ -13,22 +13,21 @@ from sframe_utils import *
 from wsdm_utils import *
 
 # Parameters
-if len(sys.argv == 3):
+if len(sys.argv) == 3:
     date_min = sys.argv[1]
     date_max = sys.argv[2]
-    log_types = [0]#[0,1,2,3]
+    log_types = [0,1,2,3]
 else:
     raise RuntimeError("feature_engineering.py <date_min>  <date_max>")
 
-experiment_dir = "/mnt/idms/fberes/data/wsdmcup19/experiments/split_0/"
+experiment_dir = "/mnt/idms/fberes/data/wsdmcup19/deploy/split_0/"
 data_dir = "/mnt/idms/projects/recsys2018/WSDM/data"
-compressed_track_file_path = "/mnt/idms/fberes/data/wsdmcup19/all_tracks.pickle.gz"
+compressed_track_file_path = "/mnt/idms/fberes/data/wsdmcup19/deploy/all_tracks.pickle.gz"
 base_experiment_id = "track_stats_all"
 MAX_THREADS = 20
 os.environ["OMP_NUM_THREADS"] = str(MAX_THREADS)
 
-experiment_id = "%s_%s_with_%s" % (date_min, date_max, base_experiment_id)
-folder = "%s/train/%s_with_%s/" % (experiment_dir, experiment_id, base_experiment_id)
+folder = "%s/train/%s_%s_with_%s/" % (experiment_dir, date_min, date_max, base_experiment_id)
 if not os.path.exists(folder):
     os.makedirs(folder)
 print("Files will be saved in this folder:", folder)
@@ -47,6 +46,7 @@ track_feats_variance = np.array([tr_info[col].var() for col in track_feats])
 print("# 2. Load session files")
 
 sessions_directory = "%s/train_test/split_0/train/" % data_dir
+# TODO: Domokos preprocess needed!
 features_dir = "%s/train_test/split_0/features/train" % data_dir
 ss = SessionFileSelector(sessions_directory)
 print(ss.log_summary.head())
@@ -58,7 +58,7 @@ session_filter = {
      "features_dir":features_dir
 }
 
-session_data = ss.load_files(**session_filter, features_dir=domokos_features_dir)
+session_data = ss.load_files(**session_filter)
 
 # # Select random sessions
 uniq_codes = np.unique(np.array(session_data["session_code"]))

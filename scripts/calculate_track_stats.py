@@ -5,17 +5,17 @@ from sframe_utils import *
 from wsdm_utils import *
 
 # Parameters
-if len(sys.argv == 2):
+if len(sys.argv) == 2:
     which_part = sys.argv[1]
     if not which_part in ["first","second","both"]:
         raise RuntimeError("Choose 'which_part' from values: 'first'/'second'/'both'")
 else:
     raise RuntimeError("calculate_track_stats.py <which_part:'first'/'second'/'both'>")
 experiment_id = "track_stats_all"
-date_min = "2018-09-18"#"2018-07-15"
+date_min = "2018-07-15"
 date_max = "2018-09-18"
-log_types = [0]#None
-experiment_dir = "/mnt/idms/fberes/data/wsdmcup19/experiments/split_0/"
+log_types = None
+experiment_dir = "/mnt/idms/fberes/data/wsdmcup19/deploy/split_0/"
 data_dir = "/mnt/idms/projects/recsys2018/WSDM/data"
 MAX_THREADS = 20
 os.environ["OMP_NUM_THREADS"] = str(MAX_THREADS)
@@ -65,7 +65,6 @@ else:
 print("## ii.) Label refactor")
 
 data_for_stats = data_for_stats[data_for_stats["skip"] != None]
-print("alma", None in set(data_for_stats["skip"]))
 data_for_stats = process_skip_information(data_for_stats)
 
 print("## iii.) Track info based aggregations")
