@@ -1,7 +1,6 @@
 # wsdm-spotify-challange-2019
-Spotify Sequential Skip Prediction Challenge
 
-In this repository, we present the solution of the team Definitive Turtles for ACM WSDM Cup 2019 [Spotify Sequential Skip PredictionChallenge](https://www.crowdai.org/challenges/spotify-sequential-skip-prediction-challenge) that reached 10th place on the final leaderboard.
+In this repository, we present the solution of the team Definitive Turtles for ACM WSDM Cup 2019 [Spotify Sequential Skip Prediction Challenge](https://www.crowdai.org/challenges/spotify-sequential-skip-prediction-challenge) that reached 10th place on the final leaderboard.
 
 # Requirements
 
