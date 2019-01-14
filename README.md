@@ -16,8 +16,8 @@ Our solution is based on gradient boosted trees (GBT) combining several statisti
 
 Please follow the steps in order if you want to reproduce our final solution:
 
-1. Preprosessing: please follow the instructions [here](preprocess/)
-2. Deep learning models:  please follow the instructions [here](methods/)
-3. Gradient Boosted Trees: please follow the instructions [here](scripts/)
+1. **Preprosessing:** please follow the instructions [here](preprocess/)
+2. **Deep learning models:**  please follow the instructions [here](methods/)
+3. **Gradient Boosted Trees:** please follow the instructions [here](boosting/)
 
 If you have any problem with the code please contact the team members, [Ferenc Béres](mailto:beres@sztaki.hu) or [Domokos Kelen](mailto:kdomokos@sztaki.hu).
