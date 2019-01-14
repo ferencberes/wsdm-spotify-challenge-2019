@@ -18,6 +18,6 @@ Please follow the steps in order if you want to reproduce our final solution:
 
 1. Preprosessing: please follow the instructions [here](preprocess/)
 2. Deep learning models:  please follow the instructions [here](methods/)
-3. Gradient Boosted Trees: related instructions are coming SOON.
+3. Gradient Boosted Trees: please follow the instructions [here](scripts/)
 
 If you have any problem with the code please contact the team members, [Ferenc Béres](mailto:beres@sztaki.hu) or [Domokos Kelen](mailto:kdomokos@sztaki.hu).

@@ -5,20 +5,21 @@ from sframe_utils import *
 from wsdm_utils import *
 
 # Parameters
-if len(sys.argv) == 5:
-    date_min = sys.argv[1]
-    date_max = sys.argv[2]
-    max_log_index = int(sys.argv[3])
-    which_part = sys.argv[4]
+if len(sys.argv) == 8:
+    data_dir = sys.argv[1]
+    experiment_dir_root = sys.argv[2]
+    MAX_THREADS = int(sys.argv[3])
+    date_min = sys.argv[4]
+    date_max = sys.argv[5]
+    max_log_index = int(sys.argv[6])
+    which_part = sys.argv[7]
     if not which_part in ["first","second","both"]:
         raise RuntimeError("Choose 'which_part' from values: 'first'/'second'/'both'")
 else:
-    raise RuntimeError("calculate_track_stats.py <date_min>  <date_max> <max_log_index> <which_part:'first'/'second'/'both'>")
+    raise RuntimeError("calculate_track_stats.py <data_dir> <experiment_dir> <max_threads> <date_min>  <date_max> <max_log_index> <which_part:'first'/'second'/'both'>")
 experiment_id = "track_stats_%s_%s" % (date_min, date_max)
 log_types = None if max_log_index == 9 else list(range(max_log_index+1))
-experiment_dir = "/mnt/idms/fberes/data/wsdmcup19/deploy/split_0/"
-data_dir = "/mnt/idms/projects/recsys2018/WSDM/data"
-MAX_THREADS = 20
+experiment_dir = "%s/split_0/" % experiment_dir_root
 os.environ["OMP_NUM_THREADS"] = str(MAX_THREADS)
 
 print("# 1. Load session files")

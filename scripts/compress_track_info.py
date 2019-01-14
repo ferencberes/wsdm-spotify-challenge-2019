@@ -8,12 +8,16 @@ import pandas as pd
 import turicreate as tc
 import turicreate.aggregate as agg
 
+if len(sys.argv) == 3:
+    data_dir = sys.argv[1]
+    MAX_THREADS = int(sys.argv[2])
+else:
+    raise RuntimeError("compress_track_info.py <data_dir> <max_threads>") 
+
 # # Parameters
-raw_track_data_folder = "/mnt/idms/fberes/data/wsdmcup19/raw_track_features/track_features"
-# TODO: Domokos preprocess needed!
-track_code_file = "/mnt/idms/projects/recsys2018/WSDM/data/track_codes.pkl.gz"
-output_file = "/mnt/idms/fberes/data/wsdmcup19/deploy/all_tracks.pickle.gz"
-MAX_THREADS = 20
+raw_track_data_folder = "%s/track_features/" % data_dir
+track_code_file = "%s/track_codes.pkl.gz" % data_dir
+output_file = "%s/all_tracks.pickle.gz" % data_dir
 os.environ["OMP_NUM_THREADS"] = str(MAX_THREADS)
 
 print("# # Load data")

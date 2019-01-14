@@ -13,21 +13,23 @@ from sframe_utils import *
 from wsdm_utils import *
 
 # Parameters
-if len(sys.argv) == 5:
-    date_min = sys.argv[1]
-    date_max = sys.argv[2]
-    max_log_index = int(sys.argv[3])
-    model_experiment_id = sys.argv[4]
+if len(sys.argv) == 8:
+    data_dir = sys.argv[1]
+    experiment_dir_root = sys.argv[2]
+    MAX_THREADS = int(sys.argv[3])
+    date_min = sys.argv[4]
+    date_max = sys.argv[5]
+    max_log_index = int(sys.argv[6])
+    model_experiment_id = sys.argv[7]
 else:
-    raise RuntimeError("predict_with_model.py <date_min>  <date_max> <max_log_index> <model_experiment_id>")
+    raise RuntimeError("predict_with_model.py <data_dir> <experiment_dir> <max_threads> <date_min>  <date_max> <max_log_index> <model_experiment_id>")
 
 experiment_id = "%s_%s" % (date_min, date_max)
-experiment_dir = "/mnt/idms/fberes/data/wsdmcup19/deploy/split_0/"
-data_dir = "/mnt/idms/projects/recsys2018/WSDM/data"
-compressed_track_file_path = "/mnt/idms/fberes/data/wsdmcup19/deploy/all_tracks.pickle.gz"
+experiment_dir = "%s/split_0/" % experiment_dir_root
+compressed_track_file_path = "%s/all_tracks.pickle.gz" % data_dir
 stats_experiment_id = model_experiment_id.split("_with_")[1]
-ground_truth_exist = False#True
-MAX_THREADS = 20
+ground_truth_exist = False
+#ground_truth_exist = True
 os.environ["OMP_NUM_THREADS"] = str(MAX_THREADS)
 
 print("# 1. Load track files")

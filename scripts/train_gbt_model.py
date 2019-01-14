@@ -12,19 +12,19 @@ sys.path.insert(0, '../utils/')
 from wsdm_utils import *
 
 # Parameters
-if len(sys.argv) == 3:
-    experiment_id = sys.argv[1]
-    num_rnd_sessions = sys.argv[2]
+if len(sys.argv) == 5:
+    experiment_dir_root = sys.argv[1]
+    MAX_THREADS = int(sys.argv[2])
+    experiment_id = sys.argv[3]
+    num_rnd_sessions = sys.argv[4]
 else:
-    raise RuntimeError("train_gbt_model.py <experiment_id> <num_rnd_sessions>")
+    raise RuntimeError("train_gbt_model.py <experiment_dir> <max_threads> <experiment_id> <num_rnd_sessions>")
 
-experiment_dir = "/mnt/idms/fberes/data/wsdmcup19/deploy/split_0/"
+experiment_dir = "%s/split_0/" % experiment_dir_root
 model_params = {"max_iterations":80, "max_depth":5, "min_child_weight":100, "validation_set":'auto'}
 max_num_training_records = 10000000
 k = 100
-MAX_THREADS = 20
 os.environ["OMP_NUM_THREADS"] = str(MAX_THREADS)
-
 
 # # 1. Load prepared data
 # 

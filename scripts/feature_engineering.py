@@ -13,18 +13,19 @@ from sframe_utils import *
 from wsdm_utils import *
 
 # Parameters
-if len(sys.argv) == 5:
-    date_min = sys.argv[1]
-    date_max = sys.argv[2]
-    max_log_index = int(sys.argv[3])
-    stats_experiment_id = sys.argv[4]
+if len(sys.argv) == 8:
+    data_dir = sys.argv[1]
+    experiment_dir_root = sys.argv[2]
+    MAX_THREADS = int(sys.argv[3])
+    date_min = sys.argv[4]
+    date_max = sys.argv[5]
+    max_log_index = int(sys.argv[6])
+    stats_experiment_id = sys.argv[7]
 else:
-    raise RuntimeError("feature_engineering.py <date_min>  <date_max> <max_log_index> <stats_experiment_id>")
+    raise RuntimeError("feature_engineering.py <data_dir> <experiment_dir> <max_threads>  <date_min>  <date_max> <max_log_index> <stats_experiment_id>")
 
-experiment_dir = "/mnt/idms/fberes/data/wsdmcup19/deploy/split_0/"
-data_dir = "/mnt/idms/projects/recsys2018/WSDM/data"
-compressed_track_file_path = "/mnt/idms/fberes/data/wsdmcup19/deploy/all_tracks.pickle.gz"
-MAX_THREADS = 20
+experiment_dir = "%s/split_0/" % experiment_dir_root
+compressed_track_file_path = "%s/all_tracks.pickle.gz" % data_dir
 os.environ["OMP_NUM_THREADS"] = str(MAX_THREADS)
 
 folder = "%s/train/%s_%s_with_%s/" % (experiment_dir, date_min, date_max, stats_experiment_id)
