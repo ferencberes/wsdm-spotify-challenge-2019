@@ -2,6 +2,8 @@
 
 In this repository, we present the solution of the team Definitive Turtles for ACM WSDM Cup 2019 [Spotify Sequential Skip Prediction Challenge](https://www.crowdai.org/challenges/spotify-sequential-skip-prediction-challenge) that reached 10th place on the final leaderboard.
 
+You can read our solution [report](https://people.eng.unimelb.edu.au/jianzhongq/wsdm19-cup-reports/) on the [website](https://people.eng.unimelb.edu.au/jianzhongq/wsdm19-cup-reports/reports/report16.pdf) of the WSDM19 conference.
+
 # Requirements
 
 - Python 3.5 conda environment
