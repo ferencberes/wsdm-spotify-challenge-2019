@@ -42,6 +42,16 @@ track_cols = tr_info.column_names()
 track_feats = track_cols.copy()
 track_feats.remove("track_code")
 
+# NOTE: for Bobe (start)
+track_feats.remove("track_uri")
+track_feats.remove("track_name")
+track_feats.remove("artist")
+track_feats.remove("release_date_estimate")
+track_feats.remove("album_name")
+# NOTE: for Bobe (end)
+
+print(list(zip(track_cols, tr_info.column_types())))
+
 track_feats_variance = np.array([tr_info[col].var() for col in track_feats])
 
 print("# 2. Load session files")
